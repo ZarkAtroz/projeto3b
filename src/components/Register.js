@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userService from '../services/userService';
+import '../styles/Register.css';
+import '../styles/General.css';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -16,49 +18,52 @@ function Register() {
       alert('Usuário registrado com sucesso!');
       navigate('/login');
     } catch (error) {
-      alert('Erro no registro: ' + error.response?.data?.error || error.message);
+      alert('Erro no registro: ' + (error.response?.data?.error || error.message));
     }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Registrar</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label><br />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ width: '200px' }}
-          />
+    <div>
+      <nav className="nav-bar">
+        <span className="title">Landing Page</span>
+        <div className="nav-links">
+          <a href="/login">Login</a>
+          <a href="/logout">Sair</a>
         </div>
-        <div>
-          <label>Data de Nascimento:</label><br />
-          <input
-            type="date"
-            value={dataNasc}
-            onChange={(e) => setDataNasc(e.target.value)}
-            required
-            style={{ width: '200px' }}
-          />
-        </div>
-        <div>
-          <label>Senha:</label><br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: '200px' }}
-          />
-        </div>
-        <button type="submit">Registrar</button>
-      </form>
-      <p>
-        Já tem uma conta? <a href="/login">Faça login</a>
-      </p>
+      </nav>
+      <div className="form-container">
+        <h2>Crie sua conta de usuário</h2>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Data de Nascimento:</label>
+            <input
+              type="date"
+              value={dataNasc}
+              onChange={(e) => setDataNasc(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Senha:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="submit-button">Registrar</button>
+        </form>
+      </div>
     </div>
   );
 }

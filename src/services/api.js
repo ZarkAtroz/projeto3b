@@ -10,10 +10,14 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token'); // Armazene o token após o login
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('Token enviado nos headers:', token); // Log para verificar
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.error('Erro no interceptor de requisição:', error);
+    return Promise.reject(error);
+  }
 );
 
 export default api;
